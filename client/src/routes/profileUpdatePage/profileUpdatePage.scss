@@ -1,0 +1,166 @@
+.profileUpdatePage {
+    min-height: 100vh;
+    display: flex;
+    gap: 24px;
+
+    .formContainer {
+        flex: 1.2;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        padding: 24px;
+        border-radius: 24px;
+        background: rgba(255, 255, 255, 0.72);
+        backdrop-filter: blur(8px);
+        box-shadow: 0 10px 30px rgba(15, 23, 42, 0.08);
+
+        form {
+            width: 100%;
+            max-width: 480px;
+            display: flex;
+            flex-direction: column;
+            gap: 18px;
+
+            h1 {
+                margin-bottom: 4px;
+                color: #2f2938;
+                font-size: 1.8rem;
+            }
+
+            .item {
+                display: flex;
+                flex-direction: column;
+                gap: 6px;
+
+                label {
+                    font-weight: 600;
+                    color: #4b5563;
+                }
+
+                input {
+                    padding: 14px 16px;
+                    border-radius: 10px;
+                    border: 1px solid #d8c2b1;
+                    background: #fffdfb;
+                    transition:
+                        border-color 0.2s ease,
+                        box-shadow 0.2s ease;
+
+                    &:focus {
+                        outline: none;
+                        border-color: #d97706;
+                        box-shadow: 0 0 0 3px rgba(217, 119, 6, 0.15);
+                    }
+                }
+
+                .error {
+                    color: #d93025;
+                    font-size: 0.9rem;
+                    &.global {
+                        align-self: center;
+                    }
+                }
+            }
+
+            button {
+                padding: 14px 20px;
+                border-radius: 10px;
+                border: none;
+                background: linear-gradient(135deg, #d97706 0%, #b45309 100%);
+                color: white;
+                font-weight: 700;
+                cursor: pointer;
+                transition:
+                    transform 0.2s ease,
+                    box-shadow 0.2s ease;
+
+                &:hover {
+                    transform: translateY(-1px);
+                    box-shadow: 0 8px 20px rgba(180, 83, 9, 0.2);
+                }
+
+                &:disabled {
+                    opacity: 0.6;
+                    cursor: not-allowed;
+                    pointer-events: none;
+                    transform: none;
+                    box-shadow: none;
+                }
+            }
+        }
+    }
+
+    .sideContainer {
+        flex: 0.8;
+        background-color: #fcf5f3;
+        display: flex;
+        flex-direction: column;
+        gap: 20px;
+        align-items: center;
+        justify-content: center;
+        padding: 24px;
+        box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.5);
+
+        .avatar {
+            width: min(200px, 90%);
+            aspect-ratio: 1;
+            object-fit: cover;
+            border-radius: 50%;
+            border: 6px solid rgba(255, 255, 255, 0.8);
+            box-shadow: 0 12px 30px rgba(15, 23, 42, 0.12);
+        }
+        button {
+            border: none;
+            padding: 8px 20px;
+            border-radius: 10px;
+            cursor: pointer;
+            background-color: #fece51;
+            font-weight: 700;
+        }
+    }
+}
+
+@media (max-width: 900px) {
+    .profileUpdatePage {
+        flex-direction: column;
+        padding: 16px;
+
+        .formContainer,
+        .sideContainer {
+            width: 100%;
+        }
+
+        .sideContainer {
+            order: -1;
+            min-height: 220px;
+        }
+    }
+}
+
+@media (max-width: 600px) {
+    .profileUpdatePage {
+        padding: 12px;
+        gap: 14px;
+
+        .formContainer {
+            padding: 16px;
+
+            form {
+                gap: 14px;
+
+                h1 {
+                    font-size: 1.4rem;
+                }
+            }
+        }
+
+        .sideContainer {
+            padding: 16px;
+            min-height: 180px;
+
+            .avatar {
+                width: min(220px, 85%);
+            }
+        }
+    }
+}
