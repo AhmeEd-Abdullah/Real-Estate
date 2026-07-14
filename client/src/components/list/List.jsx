@@ -1,13 +1,7 @@
 import "./list.scss";
 import Card from "../card/Card";
-import { listData } from "../../lib/dummydata";
-import { useContext } from "react";
-import { authContext } from "../../context/authContext";
 
-function List() {
-    const { currentUser } = useContext(authContext);
-    const posts = currentUser.posts;
-
+function List({ posts = [] }) {
     return (
         <div className="list">
             {posts.map((item) => (

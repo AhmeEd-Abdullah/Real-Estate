@@ -11,13 +11,16 @@ function ProfileUpdatePage() {
     const curruntUserData = {
         username: currentUser?.username || "",
         email: currentUser?.email || "",
-        avatar: currentUser?.avatar || "",
+        password: "",
     };
+
+    const [avatar, setAvatar] = useState([]);
 
     const [formData, setFormData] = useState(curruntUserData);
     const [errors, setErrors] = useState({});
-    const navigate = useNavigate();
     const [isLoading, setIsLoading] = useState(false);
+
+    const navigate = useNavigate();
 
     const validateField = (name, value) => {
         if (name === "username" && value.trim().length < 3) {
@@ -66,13 +69,13 @@ function ProfileUpdatePage() {
             }
         }
 
-        if (Object.keys(requestBody).length) {
+        if (Object.keys(requestBody).length || avatar[0]) {
             setIsLoading(true);
             try {
-                const res = await apiRequest.put(
-                    Users.updateEndpoint,
-                    requestBody,
-                );
+                const res = await apiRequest.put(Users.updateEndpoint, {
+                    ...requestBody,
+                    ...(avatar[0] && { avatar: avatar[0] }),
+                });
                 console.log(res);
 
                 updateCurrentUser(res.data.data);
@@ -133,7 +136,7 @@ function ProfileUpdatePage() {
                             id="password"
                             name="password"
                             type="password"
-                            value=""
+                            value={formData.password}
                             onChange={handleChange}
                         />
                         {errors.password && (
@@ -147,11 +150,23 @@ function ProfileUpdatePage() {
             </div>
             <div className="sideContainer">
                 <img
-                    src={formData.avatar || "/no-avatar.png"}
+                    src={avatar[0] || currentUser?.avatar || "/no-avatar.png"}
                     alt="User Picture"
                     className="avatar"
+                    draggable="false"
+                    onClick={(e) => e.preventDefault()}
                 />
-                <UploadWidget isLoading={isLoading} setFormData={setFormData} />
+                <UploadWidget
+                    uwConfig={{
+                        multiple: false,
+                        folder: "avatars",
+                    }}
+                    isLoading={isLoading}
+                    value={avatar}
+                    maxImages={1}
+                    showPreview={false}
+                    setState={setAvatar}
+                />
             </div>
         </div>
     );

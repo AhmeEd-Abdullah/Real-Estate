@@ -1,18 +1,22 @@
-import { Link, useNavigate } from "react-router-dom";
+import { Link, useLoaderData, useNavigate } from "react-router-dom";
+import { Await } from "react-router";
+import { Suspense, useContext } from "react";
 import Chat from "../../components/chat/Chat";
 import List from "../../components/list/List";
 import apiRequest from "../../lib/apiRequestConfig";
+import LoaderIndicator from "../../components/loaderIndicator/LoaderIndicator";
 import "./profilePage.scss";
-import { useContext } from "react";
 import { authContext } from "../../context/authContext";
 import { Auth } from "../../lib/api-endpoints";
 
 function ProfilePage() {
+    const { posts } = useLoaderData();
+
     const { currentUser, updateCurrentUser } = useContext(authContext);
     const navigate = useNavigate();
-    const handleLogout = () => {
+    const handleLogout = async () => {
         try {
-            apiRequest.post(Auth.logoutEndpoint);
+            await apiRequest.post(Auth.logoutEndpoint);
             updateCurrentUser(null);
             navigate("/login");
         } catch (err) {
@@ -48,13 +52,58 @@ function ProfilePage() {
                     </div>
                     <div className="title">
                         <h1>My List</h1>
-                        <button>Create New Post</button>
+                        <Link to="/posts/add">
+                            <button>Create New Post</button>
+                        </Link>
                     </div>
-                    <List />
+                    <Suspense
+                        fallback={
+                            <LoaderIndicator text="Loading my posts..." />
+                        }
+                    >
+                        <Await resolve={posts}>
+                            {(profileResponse) =>
+                                profileResponse?.data?.data?.myPosts.length ? (
+                                    <List
+                                        posts={
+                                            profileResponse?.data?.data
+                                                ?.myPosts || []
+                                        }
+                                    />
+                                ) : (
+                                    <p style={{ fontSize: "20px" }}>
+                                        No Properties Added Yet.
+                                    </p>
+                                )
+                            }
+                        </Await>
+                    </Suspense>
                     <div className="title">
                         <h1>Saved List</h1>
                     </div>
-                    <List />
+                    <Suspense
+                        fallback={
+                            <LoaderIndicator text="Loading saved posts..." />
+                        }
+                    >
+                        <Await resolve={posts}>
+                            {(profileResponse) =>
+                                profileResponse?.data?.data?.savedPosts
+                                    .length ? (
+                                    <List
+                                        posts={
+                                            profileResponse?.data?.data
+                                                ?.savedPosts || []
+                                        }
+                                    />
+                                ) : (
+                                    <p style={{ fontSize: "20px" }}>
+                                        No Properties Saved Yet.
+                                    </p>
+                                )
+                            }
+                        </Await>
+                    </Suspense>
                 </div>
             </div>
             <div className="chatContainer">

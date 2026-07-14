@@ -7,3 +7,7 @@ export const Auth = {
 export const Users = {
     updateEndpoint: "users/update",
 }
+
+export const Posts = {
+    postEndpoint: "posts",
+}

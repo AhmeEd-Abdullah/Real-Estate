@@ -16,7 +16,7 @@ app.use('/api/auth', authRoute);
 app.use('/api/users', userRoute);
 app.use('/api/posts', postRoute);
 
-// app.all('*', );
+// app.all("*")
 
 app.use((error, req, res, next) => res.status(error.statusCode || 500).json({
     status: error.statusText || httpStatusText.error,

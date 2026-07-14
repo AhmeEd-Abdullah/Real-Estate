@@ -18,8 +18,8 @@ export const registerController = async (req, res, next) => {
         }
     });
     res.status(201).json({
-        "success": true,
-        "message": 'User registered successfully',
+        success: true,
+        message: 'User registered successfully',
     }
     );
 };
@@ -30,9 +30,6 @@ export const loginController = async (req, res, next) => {
     const user = await prisma.user.findUnique({
         where: {
             email
-        },
-        include: {
-            posts: true
         }
     });
     if (!user) next(appError.create(httpStatusText.fail, 404, 'User not found'))
@@ -55,16 +52,16 @@ export const loginController = async (req, res, next) => {
         maxAge: age
         // secure: true,
     }).status(200).json({
-        "success": true,
-        "message": "Loggedin successfully",
-        "data": userInfo
+        success: true,
+        message: "Loggedin successfully",
+        data: userInfo
     }
     )
 };
 
 export const logoutController = (req, res) => {
     res.clearCookie("token").status(200).json({
-        "success": true,
-        "message": "Logout Successfully",
+        success: true,
+        message: "Logout Successfully",
     })
 };

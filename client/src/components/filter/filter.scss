@@ -1,55 +1,104 @@
+@import "../../responsive.scss";
+
 .filter {
-  display: flex;
-  flex-direction: column;
-  gap: 10px;
-
-  h1 {
-    font-weight: 300;
-    font-size: 24px;
-  }
-
-  .item {
     display: flex;
     flex-direction: column;
-    gap: 2px;
+    gap: 12px;
+    position: sticky;
+    top: 0;
+    z-index: 10;
+    background: rgba(255, 255, 255, 0.95);
+    backdrop-filter: blur(10px);
+    padding: 16px 18px;
+    border: 1px solid #eee;
+    box-shadow: 0 8px 24px rgba(0, 0, 0, 0.06);
 
-    label {
-      font-size: 10px;
+    h1 {
+        font-weight: 300;
+        font-size: 24px;
+        margin: 0;
     }
 
-    input,
-    select {
-      width: 100px;
-      padding: 10px;
-      border: 1px solid #e0e0e0;
-      border-radius: 5px;
-      font-size: 14px;
+    .item {
+        display: flex;
+        flex-direction: column;
+        gap: 2px;
+        flex: 1;
+        min-width: 120px;
+
+        label {
+            font-size: 10px;
+            text-transform: uppercase;
+            letter-spacing: 0.08em;
+            color: #777;
+        }
+
+        input,
+        select {
+            width: 100%;
+            padding: 10px;
+            border: 1px solid #e0e0e0;
+            border-radius: 8px;
+            font-size: 14px;
+            background-color: #fff;
+        }
     }
-  }
 
-  .top {
-    input {
-      width: 100%;
+    .top {
+        input {
+            width: 100%;
+        }
     }
-  }
 
-  .bottom {
-    display: flex;
-    justify-content: space-between;
-    flex-wrap: wrap;
-    gap: 20px;
+    .bottom {
+        display: flex;
+        justify-content: space-between;
+        flex-wrap: wrap;
+        gap: 12px;
 
-    button {
-      width: 100px;
-      padding: 10px;
-      border: none;
-      cursor: pointer;
-      background-color: #fece51;
+        button {
+            width: 48px;
+            height: 44px;
+            padding: 0;
+            border: none;
+            cursor: pointer;
+            background-color: #fece51;
+            border-radius: 8px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            align-self: flex-end;
 
-      img {
-        width: 24px;
-        height: 24px;
-      }
+            img {
+                width: 20px;
+                height: 20px;
+            }
+        }
     }
-  }
+
+    @include md {
+        position: static;
+        padding: 14px;
+    }
+
+    @include sm {
+        gap: 10px;
+        padding: 12px;
+
+        h1 {
+            font-size: 20px;
+        }
+
+        .item {
+            min-width: 100%;
+        }
+
+        .bottom {
+            gap: 10px;
+
+            button {
+                width: 100%;
+            }
+        }
+    }
 }

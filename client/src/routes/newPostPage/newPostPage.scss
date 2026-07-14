@@ -1,76 +1,152 @@
 .newPostPage {
-  height: 100%;
-  display: flex;
-
-  .formContainer {
-    flex: 3;
-    overflow: scroll;
-
-    .wrapper {
-      margin: 30px 50px 100px 0px;
-
-      form {
-        display: flex;
-        justify-content: space-between;
-        flex-wrap: wrap;
-        gap: 20px;
-
-        .item {
-          width: 30%;
-          display: flex;
-          flex-direction: column;
-          gap: 5px;
-
-          label {
-          }
-
-          input {
-            padding: 20px;
-            border-radius: 5px;
-            border: 1px solid gray;
-          }
-
-          select {
-            padding: 19px;
-          }
-
-          &.description {
-            width: 100%;
-            height: 320px;
-
-            .quill > .ql-container > .ql-editor{
-              height: 200px;
-              font-size: 16px;
-            }
-          }
-        }
-        .sendButton {
-          width: 30%;
-          border-radius: 5px;
-          border: none;
-          background-color: teal;
-          color: white;
-          font-weight: bold;
-          cursor: pointer;
-        }
-      }
-    }
-  }
-
-  .sideContainer {
-    flex: 2;
-    background-color: #fcf5f3;
+    height: 100%;
     display: flex;
-    flex-direction: column;
-    gap: 20px;
-    align-items: center;
-    justify-content: center;
 
-    img {
-      width: 50%;
-      height: 180px;
-      object-fit: cover;
-      border-radius: 5px;
+    .formContainer {
+        flex: 3;
+        overflow: scroll;
+
+        .wrapper {
+            margin: 30px 50px 100px 0px;
+
+            form {
+                display: flex;
+                justify-content: space-between;
+                flex-wrap: wrap;
+                gap: 20px;
+
+                .item {
+                    width: 30%;
+                    display: flex;
+                    flex-direction: column;
+                    gap: 5px;
+
+                    input {
+                        padding: 20px;
+                        border-radius: 5px;
+                        border: 1px solid gray;
+                    }
+
+                    select {
+                        padding: 19px;
+                    }
+
+                    &.description {
+                        width: 100%;
+                        height: 320px;
+
+                        .quill > .ql-container > .ql-editor {
+                            height: 200px;
+                            font-size: 16px;
+                        }
+                    }
+                }
+
+                .sendButton {
+                    width: 30%;
+                    border-radius: 5px;
+                    border: none;
+                    background-color: teal;
+                    color: white;
+                    font-weight: bold;
+                    cursor: pointer;
+                    &:disabled {
+                        opacity: 0.6;
+                        cursor: not-allowed;
+                        pointer-events: none;
+                        transform: none;
+                        box-shadow: none;
+                    }
+                }
+            }
+        }
     }
-  }
+
+    .sideContainer {
+        flex: 2;
+        background: linear-gradient(145deg, #fcf5f3, #f9efe8);
+        display: flex;
+        align-items: flex-start;
+        justify-content: center;
+
+        .uploadPanel {
+            width: 100%;
+            max-width: 360px;
+            background: #fff;
+            border-radius: 16px;
+            padding: 20px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.08);
+
+            h3 {
+                margin: 0 0 8px;
+                color: #222;
+            }
+
+            p {
+                margin: 0 0 16px;
+                color: #666;
+                font-size: 0.95rem;
+            }
+        }
+
+        .upload-widget {
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+        }
+
+        .upload-btn {
+            border: none;
+            padding: 10px 18px;
+            border-radius: 999px;
+            cursor: pointer;
+            background: linear-gradient(135deg, #fece51, #f4b72d);
+            font-weight: 700;
+            color: #333;
+            box-shadow: 0 6px 16px rgba(254, 206, 81, 0.25);
+        }
+
+        .upload-hint,
+        .upload-message {
+            margin: 0;
+            font-size: 0.9rem;
+            color: #666;
+        }
+
+        .upload-message {
+            color: #b45309;
+            font-weight: 600;
+        }
+
+        .upload-preview-grid {
+            display: grid;
+            grid-template-columns: repeat(2, minmax(0, 1fr));
+            gap: 10px;
+            margin-top: 6px;
+        }
+
+        .upload-preview-card {
+            overflow: hidden;
+            border-radius: 10px;
+            border: 1px solid #ececec;
+            background: #fff;
+        }
+
+        .upload-preview-card img {
+            width: 100%;
+            height: 100px;
+            object-fit: cover;
+            display: block;
+        }
+
+        .upload-remove-btn {
+            width: 100%;
+            border: none;
+            background: #ef4444;
+            color: white;
+            padding: 6px 0;
+            cursor: pointer;
+            font-size: 0.8rem;
+        }
+    }
 }
